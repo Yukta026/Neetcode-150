@@ -1,8 +1,8 @@
-Decode Ways
------------------------
+Decode Ways using bottom up dynamic programming
+-----------------------------------------------
 Time Complexity - O(n)
 Space Complexity - O(n)
------------------------
+-----------------------------------------------
 class Solution {
     public int numDecodings(String s) {
        int n = s.length();
