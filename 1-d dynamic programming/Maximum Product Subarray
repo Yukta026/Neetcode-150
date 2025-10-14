@@ -1,0 +1,36 @@
+Maximum Product Subarray
+------------------------
+Time Complexity - O(n)
+Space Complexity - O(1)
+------------------------
+class Solution {
+    public int maxProduct(int[] nums) {
+
+        int n = nums.length;
+        int curr = nums[0];
+        int currMax = nums[0];
+        int currMin = nums[0];
+        int maxProd = nums[0];
+        for(int i=1;i<n;i++){
+ // Maintaing current maximum and minimum for each element in array
+            curr = max(nums[i],nums[i]*currMin,nums[i]*currMax);
+            currMin = min(nums[i],nums[i]*currMin,nums[i]*currMax);
+            currMax = curr;
+            maxProd = Math.max(maxProd,currMax);
+        }
+        return maxProd;
+    }
+    public int max(int a,int b,int c){
+        int ans = 0;
+        ans = Math.max(a,b);
+        ans = Math.max(ans,c);
+        return ans;
+    }
+    public int min(int a,int b,int c){
+        int ans = 0;
+        ans = Math.min(a,b);
+        ans = Math.min(ans,c);
+        return ans;
+    }
+
+}
