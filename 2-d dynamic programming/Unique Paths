@@ -1,0 +1,34 @@
+Unique Paths using Top-down dp
+------------------------------
+Time Complexity - O(m*n)
+Space Complexity - O(m*n)
+------------------------------
+class Solution {
+    public int uniquePaths(int m, int n) {
+        List<List<Integer>> memo = new ArrayList<>();
+        for(int i=0;i<=m;i++){
+            List<Integer> row = new ArrayList<>();
+            for(int j=0;j<=n;j++){
+                row.add(0);
+            }
+            memo.add(row);
+        }
+
+        int res = countPaths(m,n,memo);
+        return res;
+    }
+    public int countPaths(int m,int n,List<List<Integer>> memo){
+    // Set paths possible through boundaries as one
+        if(m == 1 || n == 1){
+            memo.get(m).set(n,1);
+            return 1;
+        }
+
+        if(memo.get(m).get(n) == 0 ){
+        // Count paths possible from top and left cells of each cell
+            int paths  = countPaths(m-1,n,memo) + countPaths(m,n-1,memo);
+            memo.get(m).set(n,paths);
+        }
+        return memo.get(m).get(n);
+    }
+}
