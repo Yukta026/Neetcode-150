@@ -1,0 +1,26 @@
+Best Time to Buy and Sell Stock with Cooldown
+---------------------------------------------
+Time Complexity - O(n)
+Space Complexity - O(1)
+---------------------------------------------
+class Solution {
+    public int maxProfit(int[] prices) {
+        int prevH = -prices[0];
+        int prevN = 0;
+        int prevC = Integer.MIN_VALUE;
+
+        int n = prices.length;
+
+        for(int i=1;i<n;i++){
+            int newH = Math.max(prevN - prices[i],prevH);
+            int newN = Math.max(prevN,prevC);
+            int newC = prices[i] + prevH;
+
+            prevH = newH;
+            prevN = newN;
+            prevC = newC;
+            
+        }
+        return Math.max(prevN,prevC);
+    }
+}
