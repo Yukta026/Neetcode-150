@@ -1,0 +1,28 @@
+Target Sum using memoization
+--------------------------------------
+Time Complexity - O(n*S)
+Space Complexity - O(n*S)
+where S = sum of all elements in nums
+--------------------------------------
+class Solution {
+    public HashMap<String, Integer> map = new HashMap<>();
+    public int findTargetSumWays(int[] nums, int target) {
+        
+        return helper(nums,target,0,0);
+    }
+
+    public int helper(int[] nums,int target,int index, int sum){
+        if(index == nums.length){
+            return sum == target ? 1 : 0;
+        }
+
+        String key = index + "," + sum;
+        if(map.containsKey(key)){
+            return map.get(key);
+        }
+        int add = helper(nums,target,index+1,sum + nums[index]);
+        int subtract = helper(nums,target,index+1,sum - nums[index]);
+        map.put(key,add+subtract);
+        return add + subtract;
+    }
+}
