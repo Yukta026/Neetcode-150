@@ -1,0 +1,42 @@
+Longest Increasing Path in Matrix using memoization 
+---------------------------------------------------
+Time Complexity - O(m*n)
+Space Complexity - O(m*n)
+---------------------------------------------------
+class Solution {
+    public int longestIncreasingPath(int[][] matrix) {
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] dp = new int[m][n];
+        int longest = 0;
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                longest = Math.max(longest, dfs(matrix,i,j,dp));
+            }
+        }
+        return longest;
+    }
+    public int dfs(int[][] matrix,int i,int j,int[][] dp){
+        if(dp[i][j] != 0){return dp[i][j];}
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        int maxLen = 1;
+
+        int[][] dirs = {{1,0},{-1,0},{0,1},{0,-1}};
+
+        for(int[] dir : dirs){
+            int x = i + dir[0];
+            int y = j + dir[1];
+
+            if(x >= 0 && x < m && y >= 0 && y < n && matrix[x][y] > matrix[i][j]){
+                maxLen = Math.max(maxLen,1 + dfs(matrix,x,y,dp));
+            }
+        }
+        dp[i][j] = maxLen;
+        return maxLen;
+
+    }
+}
