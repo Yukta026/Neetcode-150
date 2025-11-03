@@ -1,0 +1,19 @@
+Jump Game
+-----------------------
+Time Complexity - O(n)
+Space Complexity - O(1)
+-----------------------
+class Solution {
+    public boolean canJump(int[] nums) {
+        int farthest = 0;
+
+        for(int i=0;i<nums.length;i++){
+// If i is greater than farthest, reaching to farthest point is not reachable
+            if(i > farthest) { return false;}
+            farthest = Math.max(farthest,i+nums[i]);
+// If farthest is equal or greater than second last index, so game over
+            if(farthest >= nums.length-1){return true;}
+        }
+        return true;
+    }
+}
