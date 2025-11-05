@@ -1,0 +1,34 @@
+Gas Station
+------------------------
+Time Complexity - O(N)
+Space Complexity - O(1)
+------------------------
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+        int gas_sum = 0;
+        for(int i=0;i<gas.length;i++){
+            gas_sum += gas[i];
+        }
+
+        int cost_sum = 0;
+        for(int i=0;i<cost.length;i++){
+            cost_sum += cost[i];
+        }
+// If cost is more than gas, circuit traversval is impossible
+        if(gas_sum < cost_sum){
+            return -1;
+        }
+        int total = 0;
+        int result = 0;
+        for(int i=0;i<gas.length;i++){
+            total += gas[i];
+            total -= cost[i];
+// Reset total and result index when total is less than zero
+            if(total < 0){
+                total = 0;
+                result = i+1;
+            }
+        }
+        return result;
+    }
+}
