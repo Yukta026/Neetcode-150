@@ -1,0 +1,21 @@
+Merge Triplets to Form Target
+-----------------------------
+Time Complexity - O(n)
+Space Complexity - O(1)
+-----------------------------
+class Solution {
+    public boolean mergeTriplets(int[][] triplets, int[] target) {
+        boolean[] found = new boolean[3];
+
+        for(int[] num : triplets){
+// Check if triplet is valid
+            if(num[0] <= target[0] && num[1] <= target[1] && num[2] <= target[2] ){
+                for(int i=0;i<3;i++){
+// Match valid triplet with target
+                    if(num[i] == target[i]){found[i] = true;}
+                }
+            }
+        }
+        return found[0] && found[1] && found[2];
+    }
+}
