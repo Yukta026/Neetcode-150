@@ -1,0 +1,35 @@
+Partition Labels
+--------------------------------------------
+Time Complexity - O(n)
+Space Complexity - O(m)
+
+where
+m - number of unique characters in string
+-------------------------------------------
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+// Store last index of characters in map
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            map.put(c,i);
+        }
+        List<Integer> ans = new ArrayList<>();
+        int lastInd = 0;
+        int startInd = 0;
+        for(int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            lastInd = Math.max(lastInd, map.get(c));
+    // If maximum last index is traversed for a substring add the length of substring to answer array        
+            if(lastInd == i){
+                ans.add(i-startInd+1);
+                startInd = lastInd+1;
+                
+            }
+
+
+
+        }
+        return ans;
+    }
+}
