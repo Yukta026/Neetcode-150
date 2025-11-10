@@ -1,0 +1,45 @@
+Valid Parenthesis String
+------------------------
+Time Complexity - O(N)
+Space Complexity - O(N)
+------------------------
+class Solution {
+    public boolean checkValidString(String s) {
+// Store indices of left parenthesis and * in different stacks
+        Stack<Integer> st = new Stack<>();
+        Stack<Integer> st_star = new Stack<>();
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(ch == '('){
+                st.push(i);
+            }
+            if(ch == '*'){
+                st_star.push(i);
+            }
+            if(ch == ')'){
+                if(!st.isEmpty()){
+                    st.pop();
+                }
+                else if(!st_star.isEmpty()){
+                    st_star.pop();
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+
+        while(!st.isEmpty() && !st_star.isEmpty()){
+// If left parenthesis index is greater than *, missing ) hence invalid
+            if(st.peek() < st_star.peek()){
+                st.pop();
+                st_star.pop();
+            }
+            else{
+                return false;
+            }
+        }
+        return st.isEmpty();
+    }
+}
