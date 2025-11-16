@@ -1,0 +1,26 @@
+Minimum Interval to Include Each Query
+--------------------------------------
+Time Complexity - O(n+m)
+Space Complexity - O(n)
+--------------------------------------
+class Solution {
+    public int[] minInterval(int[][] intervals, int[] queries) {
+        int[] ans = new int[queries.length];
+        for(int i =0 ;i< queries.length;i++){
+            ans[i] = Integer.MAX_VALUE;
+            for(int[] interval : intervals){
+// If query is in range, input smallest range
+                if(interval[0] <= queries[i] && queries[i] <= interval[1]){
+                    
+                     ans[i] = Math.min(ans[i], interval[1] - interval[0] + 1);
+                    
+                }
+            }
+            if(ans[i] == Integer.MAX_VALUE){
+                ans[i] = -1;
+            }
+
+        }
+        return ans;
+    }
+}
