@@ -1,0 +1,24 @@
+Non-Cyclical Number
+------------------------
+Time Complexity - O(n)
+Sapce Complexity - O(1)
+------------------------
+class Solution {
+    public boolean isHappy(int n) {
+        
+        for(int i=0;i<=n;i++){
+            int sum  = 0 ;
+            while(n > 0){
+            int num = n % 10;
+            n = n / 10;
+            sum += num*num;
+            }
+// If sum == 1, number is non-cyclical
+            if( sum == 1){
+                return true;
+            }
+            n = sum;
+        }
+        return false;
+    }
+}
