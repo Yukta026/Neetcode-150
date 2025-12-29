@@ -1,0 +1,49 @@
+Detect Squares
+-------------------------
+Time Complexity - 
+For add - O(1)
+For count - O(N)
+
+Space Complexity - O(N)
+-------------------------
+class CountSquares {
+    Map<Integer,Map<Integer,Integer>> map = new HashMap();
+ 
+    public CountSquares() {
+        
+    }
+    
+    public void add(int[] point) {
+        int x = point[0];
+        int y = point[1];
+        map.putIfAbsent(x, new HashMap<>());
+        Map<Integer,Integer> yMap = map.get(x);
+        yMap.put(y, yMap.getOrDefault(y,0)+1);
+    }
+    
+    public int count(int[] point) {
+        int q_x = point[0];
+        int q_y = point[1];
+        int res = 0;
+
+        if(!map.containsKey(q_x)) return 0;
+
+        for(int x : map.keySet()){
+            if(x == q_x) continue;
+
+            int d = Math.abs(x - q_x);
+
+            int y1 = q_y + d;
+            int y2 = q_y -d ;
+
+            if(map.get(x).containsKey(y1) && map.get(q_x).containsKey(y1) && map.get(x).containsKey(q_y)){
+                res += map.get(x).get(y1) * map.get(q_x).get(y1) * map.get(x).get(q_y);
+            }
+
+            if(map.get(x).containsKey(y2) && map.get(q_x).containsKey(y2) && map.get(x).containsKey(q_y)){
+                res += map.get(x).get(y2) * map.get(q_x).get(y2) * map.get(x).get(q_y);
+            }
+        }
+        return res;
+    }
+}
