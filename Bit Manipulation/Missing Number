@@ -1,0 +1,18 @@
+Missing Number
+------------------------
+Time Complexity - O(N)
+Space Complexity - O(1)
+------------------------
+class Solution {
+    public int missingNumber(int[] nums) {
+        int ans = 0;
+        for(int i=0;i<nums.length;i++){
+            ans ^= i+1;
+        }
+// Missing number won't get nullified by XOR operation
+        for(int i=0;i<nums.length;i++){
+            ans ^= nums[i];
+        }
+        return ans;
+    }
+}
