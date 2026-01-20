@@ -1,0 +1,36 @@
+Valid Anagram
+-----------------------
+Time Complexity - O(N+M)
+Space Complexity - O(N)
+-----------------------
+class Solution {
+    public boolean isAnagram(String s, String t) {
+       HashMap<Character,Integer> map = new HashMap<>();
+// If strings not of same length, not an anagram
+       if(s.length() != t.length()){
+            return false;
+        }
+// Enter character and count to map
+       for(char c : s.toCharArray()){
+        map.put(c,map.getOrDefault(c,0) +1);
+       } 
+// If Character of stirng t not present in string s, not an anagram
+       for(char c : t.toCharArray()){
+        if(!map.containsKey(c)){
+            return false;
+        }
+        else{
+            int count = map.get(c);
+// Reduce the character count for each occurrence
+            if(count > 0){
+            map.put(c,count-1);
+            }
+            else{
+                return false;
+            }
+        }
+       }
+     
+       return true;
+    }
+}
