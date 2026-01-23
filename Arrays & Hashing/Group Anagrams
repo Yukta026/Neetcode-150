@@ -1,0 +1,40 @@
+Group Anagrams
+-------------------------------
+Time Complexity - O(m * nlogn)
+Space Complexity - O(m)
+-------------------------------
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+    
+        Map<String,List<String>> map = new HashMap<>();
+
+        for(String str:strs){
+// Count frequency of each character in each word
+            int[] freq = new int[26];
+            for(Character c:str.toCharArray()){
+                freq[c-'a']++; 
+            }
+            String arr = Arrays.toString(freq);
+// Append string if count matches, else add new entry to map
+            if(map.containsKey(arr)){
+                List<String> list = map.get(arr);
+                list.add(str);
+                map.put(arr,list);
+            }
+            else{
+                List<String> list = new ArrayList<>();
+                list.add(str);
+                map.put(arr,list);
+            }
+            
+        }
+// Store map's all values in nested arraylist
+        List<List<String>> ans = new ArrayList<>();
+        for(Map.Entry<String,List<String>> entry: map.entrySet()){
+            
+            ans.add(entry.getValue());
+        }
+        return ans;
+
+    }
+}
